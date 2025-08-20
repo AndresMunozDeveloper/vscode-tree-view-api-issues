@@ -22,69 +22,89 @@
     },
     "commands": [
       {
-        "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
-        "title": "Command That Does Not Require A Selected String",
+        "command": "treeviewissues.commandForAnyNumberOfSelectedNodes",
+        "title": "Command For Any Number Of Selected Nodes",
         "icon": "$(account)"
       },
       {
-        "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
-        "title": "Command That Requires Exactly One Selected String",
+        "command": "treeviewissues.commandForExactlyOneSelectedNode",
+        "title": "Command For Exactly One Selected Node",
         "icon": "$(activate-breakpoints)",
-        "enablement": "treeviewissues.selectedTreeItemCount == 1"
+        "enablement": "treeviewissues.selectedNodeCount == 1"
       },
       {
-        "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
-        "title": "Command That Requires At Least One Selected String",
+        "command": "treeviewissues.commandForOneOrMoreSelectedNodes",
+        "title": "Command For One Or More Selected Nodes",
         "icon": "$(add)",
-        "enablement": "treeviewissues.selectedTreeItemCount >= 1"
+        "enablement": "treeviewissues.selectedNodeCount >= 1"
+      },
+      {
+        "command": "treeviewissues.collapseAllNodes",
+        "title": "Collapse all nodes",
+        "icon": "$(collapse-all)"
+      },
+      {
+        "command": "treeviewissues.expandAllNodes",
+        "title": "Expand all nodes",
+        "icon": "$(expand-all)"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
+          "command": "treeviewissues.commandForAnyNumberOfSelectedNodes",
           "when": "view === treeviewissues",
           "group": "navigation@1"
         },
         {
-          "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
+          "command": "treeviewissues.commandForExactlyOneSelectedNode",
           "when": "view === treeviewissues",
           "group": "navigation@2"
         },
         {
-          "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+          "command": "treeviewissues.commandForOneOrMoreSelectedNodes",
           "when": "view === treeviewissues",
           "group": "navigation@3"
         },
         {
-          "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
+          "command": "treeviewissues.collapseAllNodes",
+          "when": "view === treeviewissues",
+          "group": "navigation@4"
+        },
+        {
+          "command": "treeviewissues.expandAllNodes",
+          "when": "view === treeviewissues",
+          "group": "navigation@5"
+        },
+        {
+          "command": "treeviewissues.commandForAnyNumberOfSelectedNodes",
           "when": "view === treeviewissues",
           "group": "1@1"
         },
         {
-          "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
+          "command": "treeviewissues.commandForExactlyOneSelectedNode",
           "when": "view === treeviewissues",
           "group": "1@2"
         },
         {
-          "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+          "command": "treeviewissues.commandForOneOrMoreSelectedNodes",
           "when": "view === treeviewissues",
           "group": "1@3"
         }
       ],
       "view/item/context": [
         {
-          "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
+          "command": "treeviewissues.commandForAnyNumberOfSelectedNodes",
           "when": "view === treeviewissues",
           "group": "1@1"
         },
         {
-          "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+          "command": "treeviewissues.commandForOneOrMoreSelectedNodes",
           "when": "view === treeviewissues",
           "group": "1@2"
         },
         {
-          "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
+          "command": "treeviewissues.commandForExactlyOneSelectedNode",
           "when": "view === treeviewissues",
           "group": "1@3"
         }
@@ -92,17 +112,17 @@
     },
     "keybindings": [
       {
-        "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
+        "command": "treeviewissues.commandForAnyNumberOfSelectedNodes",
         "key": "alt+0",
         "when": "focusedView == treeviewissues"
       },
       {
-        "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
+        "command": "treeviewissues.commandForExactlyOneSelectedNode",
         "key": "alt+1",
         "when": "focusedView == treeviewissues"
       },
       {
-        "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+        "command": "treeviewissues.commandForOneOrMoreSelectedNodes",
         "key": "alt+2",
         "when": "focusedView == treeviewissues"
       }
