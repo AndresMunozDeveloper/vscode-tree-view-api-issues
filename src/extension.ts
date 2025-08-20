@@ -1,26 +1,59 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+
+const outputChannel = vscode.window.createOutputChannel('Tree View Issues');
+
+const data: { [key: string]: string[] } = {
+	'Fruit': ['Apple', 'Banana', 'Grape'],
+	'Animal': ['Dog', 'Cat', 'Bird'],
+	'Planet': ['Earth', 'Mars', 'Venus']
+};
+
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-tree-view-api-issues" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('vscode-tree-view-api-issues.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from vscode-tree-view-api-issues!');
+	const treeView = vscode.window.createTreeView('treeviewissues', {
+		treeDataProvider: new StringTreeDataProvider(),
+		canSelectMany: true
 	});
+	treeView.onDidChangeSelection(event => {
+		vscode.commands.executeCommand('setContext', 'treeviewissues.selectedTreeItemCount', event.selection.length);
+	});
+	context.subscriptions.push(treeView);
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(vscode.commands.registerCommand('treeviewissues.commandForMultipleTreeItems', () => {
+		outputChannel.appendLine('Hello from Command for multiple tree items');
+		outputChannel.show(true);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('treeviewissues.commandForASingleTreeItem', () => {
+		outputChannel.appendLine('Hello from Command for a single tree item');
+		outputChannel.show(true);
+	}));
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
+
+
+class StringTreeDataProvider implements vscode.TreeDataProvider<string> {
+
+	getChildren(element?: string): vscode.ProviderResult<string[]> {
+		if (element) {
+			return data[element];
+		}
+		else {
+			return Object.keys(data);
+		}
+	}
+
+	getTreeItem(element: string): vscode.TreeItem {
+		const treeItem = new vscode.TreeItem(element);
+
+		if (Object.hasOwn(data, element)) {
+			treeItem.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+		}
+		else {
+			treeItem.collapsibleState = vscode.TreeItemCollapsibleState.None;
+		}
+
+		return treeItem;
+	}
+
+}

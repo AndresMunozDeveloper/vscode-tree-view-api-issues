@@ -12,12 +12,62 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "treeviewissues",
+          "name": "Tree View Issues"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "vscode-tree-view-api-issues.helloWorld",
-        "title": "Hello World"
+        "command": "treeviewissues.commandForMultipleTreeItems",
+        "title": "Command for multiple tree items",
+        "icon": "$(account)",
+        "enablement": "treeviewissues.selectedTreeItemCount >= 1"
+      },
+      {
+        "command": "treeviewissues.commandForASingleTreeItem",
+        "title": "Command for a single Tree Item",
+        "icon": "$(activate-breakpoints)",
+        "enablement": "treeviewissues.selectedTreeItemCount == 1"
       }
-    ]
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "treeviewissues.commandForMultipleTreeItems",
+          "when": "view === treeviewissues",
+          "group": "navigation@1"
+        },
+        {
+          "command": "treeviewissues.commandForASingleTreeItem",
+          "when": "view === treeviewissues",
+          "group": "navigation@2"
+        },
+        {
+          "command": "treeviewissues.commandForMultipleTreeItems",
+          "when": "view === treeviewissues",
+          "group": "1@1"
+        },
+        {
+          "command": "treeviewissues.commandForASingleTreeItem",
+          "when": "view === treeviewissues",
+          "group": "1@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "treeviewissues.commandForMultipleTreeItems",
+          "when": "view === treeviewissues"
+        },
+        {
+          "command": "treeviewissues.commandForASingleTreeItem",
+          "when": "view === treeviewissues"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
