@@ -19,12 +19,16 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(treeView);
 
-	context.subscriptions.push(vscode.commands.registerCommand('treeviewissues.commandForMultipleTreeItems', () => {
-		outputChannel.appendLine('Hello from Command for multiple tree items');
+	context.subscriptions.push(vscode.commands.registerCommand('treeviewissues.commandThatDoesNotRequireASelectedString', (focusedString) => {
+		outputChannel.appendLine(`Hello from "Command That Does Not Require A Selected String". focusedString=${focusedString}`);
 		outputChannel.show(true);
 	}));
-	context.subscriptions.push(vscode.commands.registerCommand('treeviewissues.commandForASingleTreeItem', () => {
-		outputChannel.appendLine('Hello from Command for a single tree item');
+	context.subscriptions.push(vscode.commands.registerCommand('treeviewissues.commandThatRequiresAtLeastOneSelectedString', (focusedString) => {
+		outputChannel.appendLine(`Hello from "Command That Requires At Least One Selected String". focusedString=${focusedString}`);
+		outputChannel.show(true);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('treeviewissues.commandThatRequiresExactlyOneSelectedString', (focusedString) => {
+		outputChannel.appendLine(`Hello from "Command That Requires Exactly One Selected String". focusedString=${focusedString}`);
 		outputChannel.show(true);
 	}));
 }
