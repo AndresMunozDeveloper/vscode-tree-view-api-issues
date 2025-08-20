@@ -15,6 +15,8 @@ export function activate(context: vscode.ExtensionContext) {
 		canSelectMany: true
 	});
 	treeView.onDidChangeSelection(event => {
+		outputChannel.appendLine(`Selection changed. Size=${event.selection.length}`);
+		outputChannel.show(true);
 		vscode.commands.executeCommand('setContext', 'treeviewissues.selectedTreeItemCount', event.selection.length);
 	});
 	context.subscriptions.push(treeView);

@@ -27,16 +27,16 @@
         "icon": "$(account)"
       },
       {
-        "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
-        "title": "Command That Requires At Least One Selected String",
-        "icon": "$(activate-breakpoints)",
-        "enablement": "treeviewissues.selectedTreeItemCount >= 1"
-      },
-      {
         "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
         "title": "Command That Requires Exactly One Selected String",
-        "icon": "$(add)",
+        "icon": "$(activate-breakpoints)",
         "enablement": "treeviewissues.selectedTreeItemCount == 1"
+      },
+      {
+        "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+        "title": "Command That Requires At Least One Selected String",
+        "icon": "$(add)",
+        "enablement": "treeviewissues.selectedTreeItemCount >= 1"
       }
     ],
     "menus": {
@@ -47,15 +47,32 @@
           "group": "navigation@1"
         },
         {
-          "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+          "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
           "when": "view === treeviewissues",
           "group": "navigation@2"
         },
         {
-          "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
+          "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
           "when": "view === treeviewissues",
           "group": "navigation@3"
         },
+        {
+          "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
+          "when": "view === treeviewissues",
+          "group": "1@1"
+        },
+        {
+          "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
+          "when": "view === treeviewissues",
+          "group": "1@2"
+        },
+        {
+          "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+          "when": "view === treeviewissues",
+          "group": "1@3"
+        }
+      ],
+      "view/item/context": [
         {
           "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
           "when": "view === treeviewissues",
@@ -71,22 +88,25 @@
           "when": "view === treeviewissues",
           "group": "1@3"
         }
-      ],
-      "view/item/context": [
-        {
-          "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
-          "when": "view === treeviewissues"
-        },
-        {
-          "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
-          "when": "view === treeviewissues"
-        },
-        {
-          "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
-          "when": "view === treeviewissues"
-        }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "treeviewissues.commandThatDoesNotRequireASelectedString",
+        "key": "alt+0",
+        "when": "focusedView == treeviewissues"
+      },
+      {
+        "command": "treeviewissues.commandThatRequiresExactlyOneSelectedString",
+        "key": "alt+1",
+        "when": "focusedView == treeviewissues"
+      },
+      {
+        "command": "treeviewissues.commandThatRequiresAtLeastOneSelectedString",
+        "key": "alt+2",
+        "when": "focusedView == treeviewissues"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
